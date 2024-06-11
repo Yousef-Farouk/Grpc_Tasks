@@ -9,9 +9,9 @@ namespace Grpc_Task_Server.Services
     {
         private static readonly List<Product> Products = new()
         {
-            new Product { Id = 1, Name = "Laptop", Price = 1500 },
-            new Product { Id = 2, Name = "Smartphone", Price = 6000 },
-            new Product { Id = 3, Name = "Tablet", Price = 3000 }
+            new Product { Id = 1, Name = "Laptop", Price = 1500,Category="Accessories" },
+            new Product { Id = 2, Name = "Smartphone", Price = 6000 ,Category="Accessories"},
+            new Product { Id = 3, Name = "Tablet", Price = 3000 , Category = "Accessories"}
         };
 
         public override Task<ProductResponse> GetProductById(ProductRequest request, ServerCallContext context)
@@ -53,7 +53,7 @@ namespace Grpc_Task_Server.Services
 
         public override async Task<BulkProductResponse> AddBulkProducts(IAsyncStreamReader<Product> request, ServerCallContext context)
         {
-            var count = 0;
+            int count = 0;
             await foreach (var product in request.ReadAllAsync())
             {
                 if (!Products.Exists(p => p.Id == product.Id))
