@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+option csharp_namespace = "Grpc_Task_Client2.Protos";
+
+service InventoryService {
+	rpc GetProductById (ProductRequest) returns (ProductResponse); 
+	rpc AddProduct (AddProductRequest) returns (AddProductResponse);
+	rpc UpdateProduct (UpdateProductRequest) returns (UpdateProductResponse);
+}
+
+
+message Product{
+  int32 id = 1;
+  string name = 2;
+  float price = 3;
+}
+
+message ProductRequest {
+  int32 id = 1;
+}
+
+message ProductResponse {
+  bool exists = 1;
+}
+
+message AddProductRequest {
+  Product product = 1;
+}
+
+message AddProductResponse {
+  Product product = 1;
+}
+
+message UpdateProductRequest {
+  Product product = 1;
+}
+
+message UpdateProductResponse {
+  Product product = 1;
+}
